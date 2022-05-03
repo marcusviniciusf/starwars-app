@@ -56,10 +56,17 @@
   "jest": {
     "preset": "react-native",
     "setupFilesAfterEnv": [
-      "@testing-library/jest-native/extend-expect"
+      "@testing-library/jest-native/extend-expect",
+      "<rootDir>/src/tests/setup-server.ts"
     ],
     "setupFiles": [
       "<rootDir>/src/tests/setup-navigation.ts"
+    ],
+    "collectCoverageFrom": [
+      "src/screens/**/*.{ts,tsx}",
+      "src/components/**/*.{ts,tsx}",
+      "src/services/**/*.{ts,tsx}",
+      "src/utils/**/*.{ts,tsx}"
     ],
     "transformIgnorePatterns": [
       "node_modules/(?!(jest-)?@?react-native|@react-native-community|@react-navigation)"
