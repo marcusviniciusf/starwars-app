@@ -1,10 +1,18 @@
-// import MoviesListScreen from './MoviesListScreen';
-import {render} from '@testing-library/react-native';
-import Routes from 'routes';
+import {renderWithNavigation} from 'tests/utils';
+
+beforeEach(() => {
+  jest.useFakeTimers();
+});
 
 describe('MoviesListScreen', () => {
-  it('should render correctly', () => {
-    const {getByText} = render(<Routes />);
-    expect(getByText('HomePage')).toBeDefined();
+  it('should render loading', () => {
+    const {getByTestId} = renderWithNavigation();
+    const loading = getByTestId('full-loading');
+    expect(loading).toBeDefined();
+  });
+  it('should render render list', async () => {
+    const {findByTestId} = renderWithNavigation();
+    const flatList = await findByTestId('movies-list-flatlist');
+    expect(flatList).toBeDefined();
   });
 });

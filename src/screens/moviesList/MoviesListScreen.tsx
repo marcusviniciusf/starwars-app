@@ -1,33 +1,73 @@
-import {View, Text, Button} from 'react-native';
-
-import {RootStackParamList} from 'types/routes';
-import type {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {FlatList} from 'react-native';
+import React from 'react';
 import {useNavigation} from '@react-navigation/native';
+// Types
+import {MoviesListScreenProps} from 'types/routes';
+import {Film} from 'types/swapi';
+// Hooks
+import {useGetFilms} from 'hooks/useApi';
+// UI
+import CardFilm from 'components/CardFilm';
+import Loading from 'components/Loading';
+// Screen UI
+import MoviesListScreenHeader from './components/Header';
+import MoviesListHeader from './components/ListHeader';
 
-type MoviesListScreenProps = NativeStackNavigationProp<
-  RootStackParamList,
-  'MoviesList'
->;
+type SortType = 'episode' | 'title';
 
 const MoviesListScreen = () => {
   const navigation = useNavigation<MoviesListScreenProps>();
+  const {data, isLoading} = useGetFilms();
+  const [sortType, setSortType] = React.useState<SortType>('title');
+
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      header: () => <MoviesListScreenHeader />,
+    });
+  }, [navigation]);
+
+  const moviesList = React.useMemo(() => {
+    const results = data?.results || [];
+    if (sortType === 'episode') {
+      return results.sort((a, b) => a.episode_id - b.episode_id);
+    }
+    return results.sort((a, b) => a.title.localeCompare(b.title));
+  }, [data, sortType]);
+
+  const handleNavigateMovieDetail = React.useCallback(
+    (film: Film) => {
+      navigation.navigate('Movie', {film});
+    },
+    [navigation],
+  );
+
+  const handleNavigateFavorites = React.useCallback(() => {
+    navigation.navigate('Favorites');
+  }, [navigation]);
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
-    <View>
-      <Text>HomePage</Text>
-      <Button
-        title="Navigate To Movie"
-        onPress={() =>
-          navigation.navigate('Movie', {
-            movieId: 999,
-          })
-        }
-      />
-      <Button
-        title="Navigate To Favorites"
-        onPress={() => navigation.navigate('Favorites')}
-      />
-    </View>
+    <FlatList
+      testID="movies-list-flatlist"
+      data={moviesList}
+      contentContainerStyle={{
+        paddingBottom: 8,
+      }}
+      stickyHeaderIndices={[0]}
+      ListHeaderComponent={() => (
+        <MoviesListHeader
+          onSetSortType={setSortType}
+          selectedSortType={sortType}
+          onFavoritesPress={handleNavigateFavorites}
+        />
+      )}
+      renderItem={({item}) => (
+        <CardFilm item={item} onPress={handleNavigateMovieDetail} />
+      )}
+    />
   );
 };
 
