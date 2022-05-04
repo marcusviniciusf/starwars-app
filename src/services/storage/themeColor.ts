@@ -3,7 +3,7 @@ import type {ThemeColorType} from 'types/theme';
 
 const getThemeColor = async (): Promise<ThemeColorType> => {
   const themeColor = await getItem('THEME');
-  return themeColor || 'jedi';
+  return themeColor || 'sith';
 };
 const setTheme = async (color: ThemeColorType): Promise<ThemeColorType> => {
   await setItem(color, 'THEME');

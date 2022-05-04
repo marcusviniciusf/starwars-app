@@ -27,7 +27,7 @@ describe('ThemeColorProvider', () => {
         <CustomApp />,
       </ThemeProvider>,
     );
-    expect(getByTestId('color-text')).toHaveTextContent('Light');
+    expect(getByTestId('color-text')).toHaveTextContent('Dark');
   });
   it('should change themeColor', async () => {
     const {getByTestId, findByTestId} = render(
@@ -39,7 +39,7 @@ describe('ThemeColorProvider', () => {
     act(() => {
       fireEvent(button, 'press');
     });
-    expect(getByTestId('color-text')).toHaveTextContent('Dark');
+    expect(getByTestId('color-text')).toHaveTextContent('Light');
   });
   it('should fire no themeprovider defined error', async () => {
     const spy = jest.spyOn(console, 'error');

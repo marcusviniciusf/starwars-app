@@ -10,7 +10,7 @@ type ThemeColorProviderProps = React.PropsWithChildren<{}>;
 
 const ThemeColorProvider = (props: ThemeColorProviderProps) => {
   const {children} = props;
-  const [themeColor, setThemeColor] = React.useState<ThemeColorType>('jedi');
+  const [themeColor, setThemeColor] = React.useState<ThemeColorType>('sith');
 
   React.useEffect(() => {
     const getStoredColor = async () => {
