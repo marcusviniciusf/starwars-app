@@ -7,28 +7,39 @@ import {
   mockStarship,
   mockVehicle,
 } from 'tests/mocks/swapi';
+import config from 'config';
 
-const getFilms = rest.get('/api/films', (req, res, ctx) => {
-  const response = res(ctx.json([mockFilm]));
+const getFilms = rest.get(config.SWAPI_URI + '/films', (req, res, ctx) => {
+  const response = res(
+    ctx.json({
+      count: 1,
+      next: null,
+      previous: null,
+      results: [mockFilm],
+    }),
+  );
   return response;
 });
-const getPeople = rest.get('/api/people', (req, res, ctx) => {
+const getPeople = rest.get(config.SWAPI_URI + '/people', (req, res, ctx) => {
   const response = res(ctx.json(mockPeople));
   return response;
 });
-const getStarship = rest.get('/api/starship', (req, res, ctx) => {
-  const response = res(ctx.json(mockStarship));
-  return response;
-});
-const getVehicle = rest.get('/api/vehicle', (req, res, ctx) => {
+const getStarship = rest.get(
+  config.SWAPI_URI + '/starships',
+  (req, res, ctx) => {
+    const response = res(ctx.json(mockStarship));
+    return response;
+  },
+);
+const getVehicle = rest.get(config.SWAPI_URI + '/vehicles', (req, res, ctx) => {
   const response = res(ctx.json(mockVehicle));
   return response;
 });
-const getPlanet = rest.get('/api/planet', (req, res, ctx) => {
+const getPlanet = rest.get(config.SWAPI_URI + '/planets', (req, res, ctx) => {
   const response = res(ctx.json(mockPlanet));
   return response;
 });
-const getSpecies = rest.get('/api/species', (req, res, ctx) => {
+const getSpecies = rest.get(config.SWAPI_URI + '/species', (req, res, ctx) => {
   const response = res(ctx.json(mockSpecies));
   return response;
 });
