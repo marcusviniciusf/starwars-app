@@ -2,6 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const KEYS = {
   FAVORITES: '@starwarsapp/favorites',
+  THEME: '@starwarsapp/theme',
 };
 
 const setItem = (item: unknown, key: keyof typeof KEYS) => {

@@ -19,3 +19,7 @@ const addRemoveFavorites = async (film: Film): Promise<Film[]> => {
 };
 
 export {getFavorites, addRemoveFavorites};
+export default {
+  getFavorites,
+  addRemoveFavorites,
+};

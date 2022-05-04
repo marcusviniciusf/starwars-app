@@ -16,6 +16,7 @@
     "@react-navigation/native": "^6.0.10",
     "@react-navigation/native-stack": "^6.6.2",
     "react": "17.0.2",
+    "react-error-boundary": "^3.1.4",
     "react-native": "0.68.1",
     "react-native-gesture-handler": "^2.4.1",
     "react-native-pager-view": "^5.4.15",
@@ -56,7 +57,7 @@
   "jest": {
     "preset": "react-native",
     "setupFilesAfterEnv": [
-      "@testing-library/jest-native/extend-expect",
+      "<rootDir>/jest.setupFilesAfterEnv.ts",
       "<rootDir>/src/tests/setup-server.ts"
     ],
     "setupFiles": [
@@ -66,7 +67,9 @@
       "src/screens/**/*.{ts,tsx}",
       "src/components/**/*.{ts,tsx}",
       "src/services/**/*.{ts,tsx}",
-      "src/utils/**/*.{ts,tsx}"
+      "src/utils/**/*.{ts,tsx}",
+      "src/store/**/*.{ts,tsx}",
+      "src/providers/**/*.{ts,tsx}"
     ],
     "transformIgnorePatterns": [
       "node_modules/(?!(jest-)?@?react-native|@react-native-community|@react-navigation)"
