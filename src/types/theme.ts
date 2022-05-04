@@ -1,3 +1,5 @@
+import {Film} from './swapi';
+
 type ThemeColorType = 'jedi' | 'sith';
 
 type ThemeColorContext = {
@@ -5,4 +7,9 @@ type ThemeColorContext = {
   setThemeColor: (color: ThemeColorType) => void;
 };
 
-export type {ThemeColorType, ThemeColorContext};
+type FavoritesContext = {
+  favorites: Film[];
+  toggleFavorite: (film: Film) => void;
+};
+
+export type {ThemeColorType, ThemeColorContext, FavoritesContext};

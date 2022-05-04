@@ -11,11 +11,7 @@ import {
 
 const textProps = compose(space, color, typography);
 
-type TextProps = SpaceProps &
-  Omit<TypographyProps, 'fontFamily'> &
-  ColorProps & {
-    // variant?: 'primary' | 'secondary';
-  };
+type TextProps = SpaceProps & Omit<TypographyProps, 'fontFamily'> & ColorProps;
 
 const Text = styled.Text<TextProps>(
   ({theme}) => css`

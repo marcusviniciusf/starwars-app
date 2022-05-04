@@ -1,7 +1,7 @@
 import {SWRConfig} from 'swr';
 import Routes from './routes';
 import config from './config';
-import {ThemeColorProvider, ThemeProvider} from 'providers';
+import {ThemeColorProvider, ThemeProvider, FavoritesProvider} from 'providers';
 
 const App = () => {
   return (
@@ -12,7 +12,9 @@ const App = () => {
             fetch(`${config.SWAPI_URI}${res}`, init).then(r => r.json()),
         }}>
         <ThemeProvider>
-          <Routes />
+          <FavoritesProvider>
+            <Routes />
+          </FavoritesProvider>
         </ThemeProvider>
       </SWRConfig>
     </ThemeColorProvider>
