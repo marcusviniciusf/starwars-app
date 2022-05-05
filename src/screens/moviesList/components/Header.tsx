@@ -3,6 +3,7 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import Box from 'components/Box';
 import styled from 'styled-components/native';
 import HeaderSwitch from './HeaderSwitch';
+import useTheme from 'hooks/useTheme';
 
 const HeaderLogo = styled.Image`
   width: 130px;
@@ -11,6 +12,7 @@ const HeaderLogo = styled.Image`
 `;
 
 const MoviesListHeader = () => {
+  const {themeColor} = useTheme();
   const {top} = useSafeAreaInsets();
   return (
     <Box
@@ -20,7 +22,12 @@ const MoviesListHeader = () => {
       px={4}
       justifyContent="space-between"
       alignItems={'center'}>
-      <HeaderLogo resizeMode="contain" source={Images.StarWarsLogo} />
+      <HeaderLogo
+        resizeMode="contain"
+        source={
+          themeColor === 'sith' ? Images.StarWarsLogo : Images.StarWarsLogoBlack
+        }
+      />
       <HeaderSwitch />
     </Box>
   );

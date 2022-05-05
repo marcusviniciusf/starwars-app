@@ -22,6 +22,7 @@ const MoviesListScreen = () => {
 
   React.useLayoutEffect(() => {
     navigation.setOptions({
+      headerShown: true,
       header: () => <MoviesListScreenHeader />,
     });
   }, [navigation]);
