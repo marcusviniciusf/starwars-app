@@ -18,7 +18,7 @@ type BarProps = {
 const Bar = (props: BarProps) => {
   const {enabled} = props;
   if (enabled) {
-    return <HorizontalBar />;
+    return <HorizontalBar testID="horizontal-bar" />;
   }
   return null;
 };

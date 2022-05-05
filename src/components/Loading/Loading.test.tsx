@@ -1,4 +1,4 @@
-import {render} from '@testing-library/react-native';
+import {render} from 'tests/utils';
 import Loading from './Loading';
 
 describe('Components Loading', () => {
