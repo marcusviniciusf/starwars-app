@@ -1,10 +1,11 @@
+import React from 'react';
 import {render} from '@testing-library/react-native';
-import config from 'config';
+import {SWRConfig} from 'swr';
+import Routes from 'routes';
+// Services
+import {fetcher} from 'services/fetcher';
 // Providers
 import {ThemeColorProvider, ThemeProvider} from 'providers';
-import React from 'react';
-import Routes from 'routes';
-import {SWRConfig} from 'swr';
 // Types
 import type {RootStackParamList} from 'types/routes';
 
@@ -14,8 +15,7 @@ const DefaultProviders = (props: React.PropsWithChildren<{}>) => {
       <ThemeProvider>
         <SWRConfig
           value={{
-            fetcher: (res, init) =>
-              fetch(`${config.SWAPI_URI}${res}`, init).then(r => r.json()),
+            fetcher,
           }}>
           {props.children}
         </SWRConfig>

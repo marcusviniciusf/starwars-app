@@ -25,6 +25,8 @@ const RootStackNavigator = (props: RootStackNavigatorProps) => {
     <NavigationContainer>
       <StatusBar
         barStyle={themeColor === 'sith' ? 'light-content' : 'dark-content'}
+        translucent
+        backgroundColor={'transparent'}
       />
       <Stack.Navigator
         initialRouteName={initialRouteName}
@@ -32,40 +34,28 @@ const RootStackNavigator = (props: RootStackNavigatorProps) => {
           contentStyle: {
             backgroundColor: colors.background,
           },
+          animation: 'slide_from_right',
+          headerBackTitleVisible: false,
+          headerTintColor: colors.primary,
+          headerStyle: {
+            backgroundColor: colors.background,
+          },
+          headerTitleStyle: {
+            color: colors.primary,
+            fontSize: 18,
+          },
+          headerTitleAlign: 'center',
         }}>
-        <Stack.Screen name="MoviesList" component={MoviesListScreen} />
         <Stack.Screen
-          name="Movie"
-          component={MovieScreen}
-          options={{
-            headerBackTitleVisible: false,
-            headerTintColor: colors.primary,
-            headerStyle: {
-              backgroundColor: colors.background,
-            },
-            headerTitleStyle: {
-              color: colors.primary,
-            },
-          }}
+          name="MoviesList"
+          component={MoviesListScreen}
+          options={{headerShown: false}}
         />
-        <Stack.Screen
-          name="Favorites"
-          component={FavoritesScreen}
-          options={{
-            headerBackTitleVisible: false,
-            headerTintColor: colors.primary,
-            headerStyle: {
-              backgroundColor: colors.background,
-            },
-            headerTitleStyle: {
-              color: colors.primary,
-            },
-          }}
-        />
+        <Stack.Screen name="Movie" component={MovieScreen} />
+        <Stack.Screen name="Favorites" component={FavoritesScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
 };
 
-export type {};
 export default RootStackNavigator;
