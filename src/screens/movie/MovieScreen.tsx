@@ -22,13 +22,7 @@ const TabBox = styled(Box)(
 
 const Tab = createMaterialTopTabNavigator();
 
-const TabsList = [
-  'Characters',
-  'Species',
-  'Starships',
-  //  'Vehicles',
-  //  'Species'
-];
+const TabsList = ['Characters', 'Planets', 'Starships', 'Vehicles', 'Species'];
 
 const MovieScreen = (props: MovieScreenProps) => {
   const {route, navigation} = props;

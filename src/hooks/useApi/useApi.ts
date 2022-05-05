@@ -1,12 +1,6 @@
-import type {
-  Film,
-  People,
-  Starship,
-  Vehicle,
-  Species,
-  Planet,
-  SWApiPaginatedResponse,
-} from 'types/swapi';
+import type {Film, SWApiPaginatedResponse} from 'types/swapi';
+import {getUrlId} from 'utils';
+import {multiFetcher} from 'services/fetcher';
 import useSWR, {SWRResponse} from 'swr';
 
 const responseGeneric = <T = unknown>(response: SWRResponse<T, unknown>) => {
@@ -23,32 +17,11 @@ const useGetFilms = () => {
   const response = useSWR<SWApiPaginatedResponse<Film>>('/films');
   return responseGeneric(response);
 };
-const useGetPeople = (peopleId: string) => {
-  const response = useSWR<People>(`/people/${peopleId}`);
-  return responseGeneric(response);
-};
-const useGetStarship = (starshipId: string) => {
-  const response = useSWR<Starship>(`/starships/${starshipId}`);
-  return responseGeneric(response);
-};
-const useGetVehicle = (vehicleId: string) => {
-  const response = useSWR<Vehicle>(`/vehicles/${vehicleId}`);
-  return responseGeneric(response);
-};
-const useGetSpecies = (speciesId: string) => {
-  const response = useSWR<Species>(`/species/${speciesId}`);
-  return responseGeneric(response);
-};
-const useGetPlanet = (planetId: string) => {
-  const response = useSWR<Planet>(`/planets/${planetId}`);
+
+const useGetFilmDetailByName = (list: string[], name: string) => {
+  const apiIds = list.map(item => `/${name}/${getUrlId(item)}`);
+  const response = useSWR(apiIds, multiFetcher);
   return responseGeneric(response);
 };
 
-export {
-  useGetFilms,
-  useGetPeople,
-  useGetStarship,
-  useGetVehicle,
-  useGetSpecies,
-  useGetPlanet,
-};
+export {useGetFilms, useGetFilmDetailByName};

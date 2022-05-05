@@ -1,20 +1,16 @@
-import {useGetStarship} from 'hooks/useApi';
 import useTheme from 'hooks/useTheme';
+import type {Starship} from 'types/swapi';
 // UI
 import Box from 'components/Box';
 import Text from 'components/Typography';
 
 type CardStarShipProps = {
-  id: string;
+  item: Starship;
 };
 
 const CardStarShip = (props: CardStarShipProps) => {
-  const {id} = props;
+  const {item} = props;
   const {themeColor} = useTheme();
-  const {data} = useGetStarship(id);
-  if (!data) {
-    return null;
-  }
   return (
     <Box
       p={3}
@@ -25,7 +21,7 @@ const CardStarShip = (props: CardStarShipProps) => {
       borderColor={themeColor === 'jedi' ? 'barColor' : 'transparent'}
       backgroundColor="cardBackground">
       <Text fontSize={4} mb={3}>
-        {data?.name}
+        {item?.name}
       </Text>
 
       <Box flexDirection="row">
@@ -34,7 +30,7 @@ const CardStarShip = (props: CardStarShipProps) => {
             Model
           </Text>
           <Text fontSize={2} numberOfLines={2}>
-            {data?.model}
+            {item?.model}
           </Text>
         </Box>
         <Box flex={0.6}>
@@ -42,7 +38,7 @@ const CardStarShip = (props: CardStarShipProps) => {
             Class
           </Text>
           <Text fontSize={2} numberOfLines={2}>
-            {data?.starship_class}
+            {item?.starship_class}
           </Text>
         </Box>
       </Box>
@@ -52,7 +48,7 @@ const CardStarShip = (props: CardStarShipProps) => {
             Max Speed
           </Text>
           <Text fontSize={2} numberOfLines={1}>
-            {data?.max_atmosphering_speed}
+            {item?.max_atmosphering_speed}
           </Text>
         </Box>
         <Box flex={0.6}>
@@ -60,7 +56,7 @@ const CardStarShip = (props: CardStarShipProps) => {
             Cost
           </Text>
           <Text fontSize={2} numberOfLines={1}>
-            {data?.cost_in_credits}
+            {item?.cost_in_credits}
           </Text>
         </Box>
       </Box>
@@ -69,7 +65,7 @@ const CardStarShip = (props: CardStarShipProps) => {
           Manufacturer
         </Text>
         <Text fontSize={2} numberOfLines={2}>
-          {data?.manufacturer}
+          {item?.manufacturer}
         </Text>
       </Box>
     </Box>

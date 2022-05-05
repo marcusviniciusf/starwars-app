@@ -1,14 +1,16 @@
 import React from 'react';
 import styled, {css} from 'styled-components/native';
-
+import Loading from 'components/Loading';
+import {useGetFilmDetailByName} from 'hooks/useApi';
 import type {MovieTabScreenProps} from 'types/routes';
-import {getUrlId} from 'utils';
 // Cards
 import CardPeople from './CardPeople';
 import CardSpecies from './CardSpecies';
 import CardStarship from './CardStarship';
+import CardVehicles from './CardVehicles';
+import CardPlanet from './CardPlanet';
 
-const StyledScrollView = styled.ScrollView(
+const StyledScrollView = styled.FlatList(
   ({theme}) => css`
     flex: 1;
     background-color: ${theme.colors.background};
@@ -17,30 +19,45 @@ const StyledScrollView = styled.ScrollView(
 
 const MoviesLists = (props: MovieTabScreenProps) => {
   const {route} = props;
-
   const {list} = route.params;
 
+  const routeName = React.useMemo(() => {
+    const lowered = route.name.toLowerCase();
+    if (lowered === 'characters') {
+      return 'people';
+    }
+    return lowered;
+  }, [route.name]);
+
+  const {data, isLoading} = useGetFilmDetailByName(list, routeName);
+
   const renderCardByName = React.useCallback(
-    (id: string) => {
-      switch (route.name.toLowerCase()) {
+    (item: any) => {
+      switch (routeName) {
         case 'species':
-          return <CardSpecies id={id} />;
+          return <CardSpecies item={item} />;
         case 'starships':
-          return <CardStarship id={id} />;
+          return <CardStarship item={item} />;
+        case 'planets':
+          return <CardPlanet item={item} />;
+        case 'vehicles':
+          return <CardVehicles item={item} />;
         default:
-          return <CardPeople id={id} />;
+          return <CardPeople item={item} />;
       }
     },
-    [route.name],
+    [routeName],
   );
 
+  if (isLoading) {
+    return <Loading />;
+  }
+
   return (
-    <StyledScrollView>
-      {list?.map(item => {
-        const id = getUrlId(item);
-        return renderCardByName(id);
-      })}
-    </StyledScrollView>
+    <StyledScrollView
+      data={data}
+      renderItem={({item}) => renderCardByName(item)}
+    />
   );
 };
 

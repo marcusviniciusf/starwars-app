@@ -1,14 +1,14 @@
 import useTheme from 'hooks/useTheme';
-import type {Species} from 'types/swapi';
+import type {Planet} from 'types/swapi';
 // UI
 import Box from 'components/Box';
 import Text from 'components/Typography';
 
-type CardSpeciesProps = {
-  item: Species;
+type CardPlanetProps = {
+  item: Planet;
 };
 
-const CardSpecies = (props: CardSpeciesProps) => {
+const CardPlanet = (props: CardPlanetProps) => {
   const {item} = props;
   const {themeColor} = useTheme();
   return (
@@ -27,33 +27,23 @@ const CardSpecies = (props: CardSpeciesProps) => {
       <Box flexDirection="row">
         <Box flex={0.4}>
           <Text fontSize={2} color="secondary">
-            Classification
+            Climate
           </Text>
-          <Text fontSize={2}>{item?.classification}</Text>
+          <Text fontSize={2} numberOfLines={2}>
+            {item?.climate}
+          </Text>
         </Box>
         <Box flex={0.6}>
           <Text fontSize={2} color="secondary">
-            Designation
+            Populatio
           </Text>
-          <Text fontSize={2}>{item?.designation}</Text>
-        </Box>
-      </Box>
-      <Box flexDirection="row">
-        <Box flex={0.4}>
-          <Text fontSize={2} color="secondary">
-            Language
+          <Text fontSize={2} numberOfLines={2}>
+            {item?.population}
           </Text>
-          <Text fontSize={2}>{item?.language}</Text>
-        </Box>
-        <Box flex={0.6}>
-          <Text fontSize={2} color="secondary">
-            Average Height
-          </Text>
-          <Text fontSize={2}>{item?.average_height}</Text>
         </Box>
       </Box>
     </Box>
   );
 };
 
-export default CardSpecies;
+export default CardPlanet;

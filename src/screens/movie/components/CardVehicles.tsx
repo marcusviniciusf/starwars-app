@@ -1,14 +1,14 @@
 import useTheme from 'hooks/useTheme';
-import type {Species} from 'types/swapi';
+import type {Vehicle} from 'types/swapi';
 // UI
 import Box from 'components/Box';
 import Text from 'components/Typography';
 
-type CardSpeciesProps = {
-  item: Species;
+type CardVehicleProps = {
+  item: Vehicle;
 };
 
-const CardSpecies = (props: CardSpeciesProps) => {
+const CardVehicle = (props: CardVehicleProps) => {
   const {item} = props;
   const {themeColor} = useTheme();
   return (
@@ -27,33 +27,41 @@ const CardSpecies = (props: CardSpeciesProps) => {
       <Box flexDirection="row">
         <Box flex={0.4}>
           <Text fontSize={2} color="secondary">
-            Classification
+            Model
           </Text>
-          <Text fontSize={2}>{item?.classification}</Text>
+          <Text fontSize={2} numberOfLines={2}>
+            {item?.model}
+          </Text>
         </Box>
         <Box flex={0.6}>
           <Text fontSize={2} color="secondary">
-            Designation
+            Manufacturer
           </Text>
-          <Text fontSize={2}>{item?.designation}</Text>
+          <Text fontSize={2} numberOfLines={2}>
+            {item?.manufacturer}
+          </Text>
         </Box>
       </Box>
       <Box flexDirection="row">
         <Box flex={0.4}>
           <Text fontSize={2} color="secondary">
-            Language
+            Max Speed
           </Text>
-          <Text fontSize={2}>{item?.language}</Text>
+          <Text fontSize={2} numberOfLines={1}>
+            {item?.max_atmosphering_speed}
+          </Text>
         </Box>
         <Box flex={0.6}>
           <Text fontSize={2} color="secondary">
-            Average Height
+            Vehicle Class
           </Text>
-          <Text fontSize={2}>{item?.average_height}</Text>
+          <Text fontSize={2} numberOfLines={1}>
+            {item?.vehicle_class}
+          </Text>
         </Box>
       </Box>
     </Box>
   );
 };
 
-export default CardSpecies;
+export default CardVehicle;

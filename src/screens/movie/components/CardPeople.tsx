@@ -1,20 +1,16 @@
-import {useGetPeople} from 'hooks/useApi';
 import useTheme from 'hooks/useTheme';
+import type {People} from 'types/swapi';
 // UI
 import Box from 'components/Box';
 import Text from 'components/Typography';
 
 type CardPeopleProps = {
-  id: string;
+  item: People;
 };
 
 const CardPeople = (props: CardPeopleProps) => {
-  const {id} = props;
+  const {item} = props;
   const {themeColor} = useTheme();
-  const {data} = useGetPeople(id);
-  if (!data) {
-    return null;
-  }
   return (
     <Box
       p={3}
@@ -25,7 +21,7 @@ const CardPeople = (props: CardPeopleProps) => {
       borderColor={themeColor === 'jedi' ? 'barColor' : 'transparent'}
       backgroundColor="cardBackground">
       <Text fontSize={4} mb={3}>
-        {data?.name}
+        {item?.name}
       </Text>
 
       <Box flexDirection="row">
@@ -33,13 +29,13 @@ const CardPeople = (props: CardPeopleProps) => {
           <Text fontSize={2} color="secondary">
             Gender
           </Text>
-          <Text fontSize={2}>{data?.gender}</Text>
+          <Text fontSize={2}>{item?.gender}</Text>
         </Box>
         <Box flex={0.6}>
           <Text fontSize={2} color="secondary">
             Birth Year
           </Text>
-          <Text fontSize={2}>{data?.birth_year}</Text>
+          <Text fontSize={2}>{item?.birth_year}</Text>
         </Box>
       </Box>
     </Box>
