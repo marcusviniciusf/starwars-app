@@ -1,8 +1,8 @@
 import ThemeProvider from './ThemeColorProvider';
 import {useTheme} from 'hooks/useTheme';
 import {View, Text, Button} from 'react-native';
-import {render, fireEvent} from '@testing-library/react-native';
-import {act} from 'react-test-renderer';
+import {render, fireEvent, act} from '@testing-library/react-native';
+
 import {ErrorBoundary} from 'react-error-boundary';
 
 const CustomApp = () => {

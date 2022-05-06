@@ -17,10 +17,11 @@ const CardFilm = (props: CardFilmProps) => {
     item;
   return (
     <TouchableOpacity
-      testID="card-film-touch"
+      testID={`card-film-touch-${episode_id}`}
       activeOpacity={0.9}
       onPress={() => onPress(item)}>
       <Box
+        testID={`card-film-box-${episode_id}`}
         p={3}
         mx={3}
         my={2}

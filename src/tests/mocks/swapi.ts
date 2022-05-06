@@ -6,10 +6,7 @@ const mockFilm = {
   director: 'George Lucas',
   producer: 'Gary Kurtz, Rick McCallum',
   release_date: '1977-05-25',
-  characters: [
-    'https://swapi.dev/api/people/1/',
-    'https://swapi.dev/api/people/2/',
-  ],
+  characters: ['https://swapi.dev/api/people/1/'],
   planets: ['https://swapi.dev/api/planets/1/'],
   starships: [
     'https://swapi.dev/api/starships/2/',

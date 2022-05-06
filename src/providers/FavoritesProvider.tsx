@@ -12,6 +12,7 @@ type FavoritesProviderProps = React.PropsWithChildren<{}>;
 const FavoritesProvider = (props: FavoritesProviderProps) => {
   const {children} = props;
   const [favorites, setFavorites] = React.useState<Film[]>([]);
+
   React.useEffect(() => {
     const getStoredFavorites = async () => {
       const storedFavorites = await Favorites.getFavorites();

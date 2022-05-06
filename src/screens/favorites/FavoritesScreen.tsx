@@ -18,16 +18,13 @@ const FavoritesScreen = (props: FavoritesScreenProps) => {
     [navigation],
   );
 
-  if (favorites.length === 0) {
-    return (
-      <Box flex={1} justifyContent="center" alignItems={'center'}>
-        <Text fontSize={3}>No Favorites</Text>
-      </Box>
-    );
-  }
-
   return (
     <FlatList
+      ListEmptyComponent={
+        <Box py={5} justifyContent="center" alignItems={'center'}>
+          <Text fontSize={3}>No Favorites</Text>
+        </Box>
+      }
       testID="favorites-flatlist"
       data={favorites}
       renderItem={({item}) => (

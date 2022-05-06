@@ -20,7 +20,7 @@ const getFilms = rest.get(config.SWAPI_URI + '/films', (req, res, ctx) => {
   );
   return response;
 });
-const getPeople = rest.get(config.SWAPI_URI + '/people', (req, res, ctx) => {
+const getPeople = rest.get(config.SWAPI_URI + '/people/1', (req, res, ctx) => {
   const response = res(ctx.json(mockPeople));
   return response;
 });

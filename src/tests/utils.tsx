@@ -5,7 +5,7 @@ import Routes from 'routes';
 // Services
 import {fetcher} from 'services/fetcher';
 // Providers
-import {ThemeColorProvider, ThemeProvider} from 'providers';
+import {ThemeColorProvider, ThemeProvider, FavoritesProvider} from 'providers';
 // Types
 import type {RootStackParamList} from 'types/routes';
 
@@ -13,22 +13,22 @@ const DefaultProviders = (props: React.PropsWithChildren<{}>) => {
   return (
     <ThemeColorProvider>
       <ThemeProvider>
-        <SWRConfig
-          value={{
-            fetcher,
-          }}>
-          {props.children}
-        </SWRConfig>
+        <FavoritesProvider>
+          <SWRConfig
+            value={{
+              fetcher,
+            }}>
+            {props.children}
+          </SWRConfig>
+        </FavoritesProvider>
       </ThemeProvider>
     </ThemeColorProvider>
   );
 };
 
-const customRender = (ui: React.ReactElement) => {
-  return {
-    ...render(<DefaultProviders>{ui}</DefaultProviders>),
-  };
-};
+const customRender = (ui: React.ReactElement) => ({
+  ...render(<DefaultProviders>{ui}</DefaultProviders>),
+});
 
 const renderWithNavigation = (
   initialRouteName: keyof RootStackParamList = 'MoviesList',
